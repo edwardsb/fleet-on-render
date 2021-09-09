@@ -1,0 +1,1 @@
+FROM fleetdm/fleet:latest
