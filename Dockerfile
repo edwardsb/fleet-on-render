@@ -1,2 +1,2 @@
 FROM fleetdm/fleet:latest
-CMD fleet prepare db && fleet serve
+CMD fleet prepare --no-prompt=true db && fleet serve
