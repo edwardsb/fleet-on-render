@@ -1,6 +1,6 @@
 services:
 - name: honeybadger-fleet
-  plan: standard
+  plan: pro
   type: web
   env: docker
   healthCheckPath: /healthz
@@ -32,6 +32,12 @@ services:
       property: hostport
   - key: FLEET_SERVER_TLS
     value: false
+  - key: FLEET_BETA_SOFTWARE_INVENTORY
+    value: 1
+  - key: FLEET_LICENSE_KEY
+    value: FIXME
+  - key: FLEET_VULNERABILITIES_DATABASES_PATH
+    value: /home/fleet
   - key: PORT
     value: 8080
 
