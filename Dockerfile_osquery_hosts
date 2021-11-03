@@ -1,0 +1,3 @@
+FROM docker/compose
+COPY osquery.flags /etc/osquery/osquery.flags
+COPY docker-compose.yml .
