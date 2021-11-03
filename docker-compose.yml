@@ -1,0 +1,93 @@
+version: '3.7'
+
+networks:
+  fleet-preview:
+    name: fleet-preview
+
+services:
+  ubuntu20-osquery:
+    image: "dactiv/osquery:4.5.1-ubuntu20.04"
+    environment:
+      ENROLL_SECRET: "${ENROLL_SECRET:?ENROLL_SECRET must be set for server authentication}"
+    command: osqueryd --flagfile=/etc/osquery/osquery.flags --tls_hostname=${FLEET_SERVER}
+    ulimits:
+      core:
+        hard:  1000000000
+        soft:  1000000000
+    networks:
+      - fleet-preview
+
+  ubuntu18-osquery:
+    image: "dactiv/osquery:4.5.1-ubuntu18.04"
+    environment:
+      ENROLL_SECRET: "${ENROLL_SECRET:?ENROLL_SECRET must be set for server authentication}"
+    command: osqueryd --flagfile=/etc/osquery/osquery.flags --tls_hostname=${FLEET_SERVER}
+    ulimits:
+      core:
+        hard:  1000000000
+        soft:  1000000000
+    networks:
+      - fleet-preview
+
+  ubuntu16-osquery:
+    image: "dactiv/osquery:4.5.1-ubuntu16.04"
+    volumes:
+      - ./fleet.crt:/etc/osquery/fleet.crt
+      - ./example_osquery.flags:/etc/osquery/osquery.flags
+    environment:
+      ENROLL_SECRET: "${ENROLL_SECRET:?ENROLL_SECRET must be set for server authentication}"
+    command: osqueryd --flagfile=/etc/osquery/osquery.flags --tls_hostname=${FLEET_SERVER}
+    ulimits:
+      core:
+        hard:  1000000000
+        soft:  1000000000
+    networks:
+      - fleet-preview
+
+  ubuntu14-osquery:
+    image: "dactiv/osquery:4.5.1-ubuntu14.04"
+    environment:
+      ENROLL_SECRET: "${ENROLL_SECRET:?ENROLL_SECRET must be set for server authentication}"
+    command: osqueryd --flagfile=/etc/osquery/osquery.flags --tls_hostname=${FLEET_SERVER}
+    ulimits:
+      core:
+        hard:  1000000000
+        soft:  1000000000
+    networks:
+      - fleet-preview
+
+  centos8-osquery:
+    image: "dactiv/osquery:4.5.1-centos8"
+    environment:
+      ENROLL_SECRET: "${ENROLL_SECRET:?ENROLL_SECRET must be set for server authentication}"
+    command: osqueryd --flagfile=/etc/osquery/osquery.flags --tls_hostname=${FLEET_SERVER}
+    ulimits:
+      core:
+        hard:  1000000000
+        soft:  1000000000
+    networks:
+      - fleet-preview
+
+  centos7-osquery:
+    image: "dactiv/osquery:4.5.1-centos7"
+    environment:
+      ENROLL_SECRET: "${ENROLL_SECRET:?ENROLL_SECRET must be set for server authentication}"
+    command: osqueryd --flagfile=/etc/osquery/osquery.flags --tls_hostname=${FLEET_SERVER}
+    ulimits:
+      core:
+        hard:  1000000000
+        soft:  1000000000
+    networks:
+      - fleet-preview
+
+  centos6-osquery:
+    image: "dactiv/osquery:4.5.1-centos6"
+    environment:
+      ENROLL_SECRET: "${ENROLL_SECRET:?ENROLL_SECRET must be set for server authentication}"
+    command: osqueryd --flagfile=/etc/osquery/osquery.flags --tls_hostname=${FLEET_SERVER}
+    ulimits:
+      core:
+        hard:  1000000000
+        soft:  1000000000
+    networks:
+      - fleet-preview
