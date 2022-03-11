@@ -1,33 +1,38 @@
 services:
-- name: meerkat-fleet
+- name: chinchilla-fleet
   plan: pro
   type: web
   env: docker
+  scaling:
+    minInstances: 1
+    maxInstances: 5
+    targetMemoryPercent: 60 # optional if targetCPUPercent is set
+    targetCPUPercent: 60 # optional if targetMemory is set
   healthCheckPath: /healthz
   envVars:
   - key: FLEET_MYSQL_ADDRESS
     fromService:
-      name: meerkat-fleet-mysql
+      name: chinchilla-fleet-mysql
       type: pserv
       property: hostport
   - key: FLEET_MYSQL_DATABASE
     fromService:
-      name: meerkat-fleet-mysql
+      name: chinchilla-fleet-mysql
       type: pserv
       envVarKey: MYSQL_DATABASE
   - key: FLEET_MYSQL_PASSWORD
     fromService:
-      name: meerkat-fleet-mysql
+      name: chinchilla-fleet-mysql
       type: pserv
       envVarKey: MYSQL_PASSWORD
   - key: FLEET_MYSQL_USERNAME
     fromService:
-      name: meerkat-fleet-mysql
+      name: chinchilla-fleet-mysql
       type: pserv
       envVarKey: MYSQL_USER
   - key: FLEET_REDIS_ADDRESS
     fromService:
-      name: meerkat-fleet-redis
+      name: chinchilla-fleet-redis
       type: pserv
       property: hostport
   - key: FLEET_SERVER_TLS
@@ -41,7 +46,8 @@ services:
   - key: PORT
     value: 8080
 
-- name: meerkat-fleet-mysql
+- name: chinchilla-fleet-mysql
+  plan: standard
   type: pserv
   env: docker
   repo: https://github.com/render-examples/mysql
@@ -49,7 +55,7 @@ services:
   disk:
     name: mysql
     mountPath: /var/lib/mysql
-    sizeGB: 10
+    sizeGB: 50
   envVars:
   - key: MYSQL_DATABASE
     value: fleet
@@ -60,7 +66,8 @@ services:
   - key: MYSQL_USER
     value: fleet
 
-- name: meerkat-fleet-redis
+- name: chinchilla-fleet-redis
+  plan: standard
   type: pserv
   env: docker
   repo: https://github.com/render-examples/redis
