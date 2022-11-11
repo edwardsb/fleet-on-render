@@ -1,5 +1,5 @@
 services:
-- name: panther-fleet
+- name: puma-fleet
   plan: pro
   type: web
   env: docker
@@ -7,27 +7,27 @@ services:
   envVars:
   - key: FLEET_MYSQL_ADDRESS
     fromService:
-      name: panther-fleet-mysql
+      name: puma-fleet-mysql
       type: pserv
       property: hostport
   - key: FLEET_MYSQL_DATABASE
     fromService:
-      name: panther-fleet-mysql
+      name: puma-fleet-mysql
       type: pserv
       envVarKey: MYSQL_DATABASE
   - key: FLEET_MYSQL_PASSWORD
     fromService:
-      name: panther-fleet-mysql
+      name: puma-fleet-mysql
       type: pserv
       envVarKey: MYSQL_PASSWORD
   - key: FLEET_MYSQL_USERNAME
     fromService:
-      name: panther-fleet-mysql
+      name: puma-fleet-mysql
       type: pserv
       envVarKey: MYSQL_USER
   - key: FLEET_REDIS_ADDRESS
     fromService:
-      name: panther-fleet-redis
+      name: puma-fleet-redis
       type: pserv
       property: hostport
   - key: FLEET_SERVER_TLS
@@ -41,7 +41,7 @@ services:
   - key: PORT
     value: 8080
 
-- name: panther-fleet-mysql
+- name: puma-fleet-mysql
   type: pserv
   env: docker
   repo: https://github.com/render-examples/mysql
@@ -60,7 +60,7 @@ services:
   - key: MYSQL_USER
     value: fleet
 
-- name: panther-fleet-redis
+- name: puma-fleet-redis
   type: pserv
   env: docker
   repo: https://github.com/render-examples/redis
