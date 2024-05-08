@@ -1,6 +1,6 @@
 services:
 - name: fleet
-  plan: starter
+  plan: standard
   type: web
   region: frankfurt
   env: docker
