@@ -31,7 +31,7 @@ services:
       - key: FLEET_REDIS_ADDRESS
         fromService:
           name: fleet-redis
-          type: pserv
+          type: redis
           property: hostport
       - key: FLEET_SERVER_TLS
         value: false
@@ -57,10 +57,5 @@ services:
         value: fleet
 
   - name: fleet-redis
-    type: pserv
-    runtime: docker
-    repo: https://github.com/render-examples/redis
-    disk:
-      name: redis
-      mountPath: /var/lib/redis
-      sizeGB: 10
+    type: redis
+    ipAllowList: []
