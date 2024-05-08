@@ -31,8 +31,8 @@ services:
       - key: FLEET_REDIS_ADDRESS
         fromService:
           name: fleet-redis
-          type: redis
-          property: connectionString
+          type: pserv
+          property: hostport
       - key: FLEET_SERVER_TLS
         value: 'false'
       - key: PORT
@@ -57,5 +57,11 @@ services:
         value: fleet
 
   - name: fleet-redis
-    type: redis
-    ipAllowList: []
+    type: pserv
+    runtime: image
+    image:
+      url: 'redis:7.2.4'
+#    disk:
+#      name: redis
+#      mountPath: /data
+#      sizeGB: 10
