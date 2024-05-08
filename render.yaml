@@ -2,7 +2,7 @@ services:
   - name: fleet
     plan: standard
     type: web
-    env: docker
+    runtime: image
     image:
       url: 'fleetdm/fleet:latest'
     preDeployCommand: "fleet prepare --no-prompt=true db"
@@ -40,7 +40,7 @@ services:
 
   - name: fleet-mysql
     type: pserv
-    env: docker
+    runtime: docker
     repo: https://github.com/render-examples/mysql
     disk:
       name: mysql
@@ -58,7 +58,7 @@ services:
 
   - name: fleet-redis
     type: pserv
-    env: docker
+    runtime: docker
     repo: https://github.com/render-examples/redis
     disk:
       name: redis
